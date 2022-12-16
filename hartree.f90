@@ -1,5 +1,45 @@
   program hartree
   implicit none
+!=================================================================================================================================
+! Contains the following procedures:
+!
+!                                   -------------------------
+!                                   |   F U N C T I O N S   |
+!                                   -------------------------
+!    i. Fact(n) -- outputs the factorial for a given integer value
+!
+!   ii. Gam(n,l) -- outputs a gamma function, gamma(n + l + 3.0/2.0) for quantum numbers n and l
+!
+!  iii. Laguerre(l, max_n, b, r) -- outputs the Hermite polynomial associated with wavefunction solution for a harmonic oscillator
+!
+!==================================================================================================================================
+!                                   -------------------------
+!                                   | S U B R O U T I N E S |
+!                                   -------------------------
+!    i. Subroutine setpsi(l, n, max_n, nr, nsq, dr, psi)--sets harmonic oscillator states
+!
+!   ii. Subroutine density(l, n, max_n, nr, nsq, dr, Lag, psi, rho, rho_tot)-- uses psi(nr, nsq, 2) to calculate the density
+!       rho(nr, nsq, 2) for neutrons and protons individual as well as total density rho_tot(nr,nsq).  These arrays are integrated
+!
+!  iii. Subroutine damp(r, dr, l, T, nr)-- Damping operator applied to harmonic oscillator states when calculating psitmp(nr, nsq, 2)
+!
+!   vi. Subroutine Coulomb(nr, nsq, dr, phi_c, rho)-- solves the Poisson equation to find the Coulomb
+!       contribution to the potential.
+!
+!    v. Subroutine yukawa(nr, nsq, pi, phi_y, rho_tot, dr)-- solves the Helmhotz equation to find
+!       contribution from the Yukawa potential (both proton and neutron).
+!
+!   iv. Subroutine BKN(phi_c, phi_y, nr, nsq, dr, rho, rho_tot, UBKN)-- uses density calculated
+!       from the wavefunction, and both Coulomb and Yukawa to calculate total potential.
+!
+!   vi. Subroutine spet(nr, nsq, l, n, dr, psi, UBKN, spe, tpe)-- finds eigenvalue spe(ns, iq) and kinetic
+!       energy
+!
+!  vii. Subroutine grstep(T, psi, psitmp, spe, l, dr, nr, nsq, UBKN)-- calculates new wavefunction psitmp using damping operator
+!       and single particle energies
+!
+! viii. Subroutine SHF(l, nr, nsq, dr, rho, rho_tot, spe, tpe, EHF)
+!---------------------------------------------------------------------------------------------------------------------------------
 !----------------------------------------------------------------------------------------------------------------------------------------------
 !   P a r a m e t e r s:
 !----------------------------------------------------------------------------------------------------------------------------------------------
